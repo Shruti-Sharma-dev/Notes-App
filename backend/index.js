@@ -8,7 +8,13 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173', // for local frontend (Vite)
+    'https://notes-app-shruti-sharmas-projects-09afc016.vercel.app' // for Vercel frontend
+  ],
+  credentials: true
+}));
 
 
 // server.js

@@ -17,7 +17,7 @@ const Home = () => {
 
   const fetchNotes = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/note', {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/note`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -64,7 +64,7 @@ const Home = () => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete(`http://localhost:5000/api/note/${id}`, {
+      const res = await axios.delete(`${import.meta.env.VITE_API_URL}/note/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -81,7 +81,7 @@ const Home = () => {
   const addNote = async (title, description) => {
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/note/add',
+        `${import.meta.env.VITE_API_URL}/note/add`,
         {
           title,
           description,
@@ -106,7 +106,7 @@ const Home = () => {
   const edittingNote = async (id, title, description) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/note/${id}`,
+        `${import.meta.env.VITE_API_URL}/note/${id}`,
         {
           title,
           description,
@@ -129,7 +129,7 @@ const Home = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen ">
-      <Navbar setQuery={setQuery} />
+      <Navbar/>
 
 
 
