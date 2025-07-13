@@ -10,22 +10,28 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
+import cors from 'cors';
+
 const allowedOrigins = [
-  'https://notes-gm2iq7aq0-shruti-sharmas-projects-09afc016.vercel.app',
-  'https://notes-app-git-main-shruti-sharmas-projects-09afc016.vercel.app',
   'http://localhost:5173',
+  'https://notes-app.vercel.app', // main
+  'https://notes-app-git-main-shruti-sharmas-projects-09afc016.vercel.app', // main branch preview
 ];
 
-app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+// Allow dynamic Vercel preview URLs
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
       callback(null, true);
     } else {
-      callback(new Error("Not allowed by CORS"));
+      callback(new Error('❌ Not allowed by CORS'));
     }
   },
   credentials: true,
-}));
+};
+
+app.use(cors(corsOptions));
+
 // server.js
 app.use((req, res, next) => {
   console.log(`[${req.method}] ${req.url}`);
