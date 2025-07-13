@@ -4,13 +4,12 @@ import cors from 'cors';
 import connectDB from './db/db.js';
 import dotenv from 'dotenv';
 import noteRouter from './routes/note.js';
-// import cors from 'cors';
+;
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 
-import cors from 'cors';
 
 const allowedOrigins = [
   'http://localhost:5173',
