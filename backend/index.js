@@ -4,28 +4,34 @@ import cors from 'cors';
 import connectDB from './db/db.js';
 import dotenv from 'dotenv';
 import noteRouter from './routes/note.js';
-dotenv.config();    
+// import cors from 'cors';
+dotenv.config();
 
 const app = express();
 app.use(express.json());
-import cors from 'cors';
 
 const allowedOrigins = [
+  'https://notes-gm2iq7aq0-shruti-sharmas-projects-09afc016.vercel.app',
   'https://notes-app-git-main-shruti-sharmas-projects-09afc016.vercel.app',
-  'http://localhost:5173'
+  'http://localhost:5173',
 ];
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
 }));
-
 // server.js
 app.use((req, res, next) => {
-    console.log(`[${req.method}] ${req.url}`);
-    next();
-  });
-  
+  console.log(`[${req.method}] ${req.url}`);
+  next();
+});
+
 app.use('/api/auth', authRouter);
 app.use('/api/note', noteRouter);
 
