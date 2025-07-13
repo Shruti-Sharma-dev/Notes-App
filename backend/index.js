@@ -8,14 +8,17 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors({
-  origin: [
-    'http://localhost:5173', // for local frontend (Vite)
-    'https://notes-app-shruti-sharmas-projects-09afc016.vercel.app' // for Vercel frontend
-  ],
-  credentials: true
-}));
+import cors from 'cors';
 
+const allowedOrigins = [
+  'https://notes-app-git-main-shruti-sharmas-projects-09afc016.vercel.app',
+  'http://localhost:5173'
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
 
 // server.js
 app.use((req, res, next) => {
