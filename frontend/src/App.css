@@ -8,4 +8,10 @@
 body{
     width: 100%;
     height: 100%;
+    /* index.css or App.css */
+
+
+    font-family: 'Poppins', 'Plus Jakarta Sans', 'Jost', sans-serif;
+
+  
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaEdit, FaTrash} from 'react-icons/fa';
 
 const pastelColors = [
   '#FFB3BA', // bright pastel red-pink
@@ -12,7 +13,7 @@ const pastelColors = [
   '#FFC3A0', // coral pastel
   '#FFABAB', // bubblegum pink
   '#B5EAD7', // fresh green pastel
-  '#C7CEEA'  // brighter lavender
+  
 ];
 const getRandomColor = () =>
   pastelColors[Math.floor(Math.random() * pastelColors.length)];
@@ -25,18 +26,18 @@ const NoteCard = ({ note, onEdit, onDelete }) => {
     style={{ backgroundColor: bgColor }}>
       <h1 className="text-2xl font-bold mb-2">{note.title}</h1>
       <p className="text-gray-600 mb-4">{note.description}</p>
-      <div className="flex gap-2">
+      <div className="flex gap-2 justify-end">
         <button
-          className="bg-white hover:grey-50 text-teal-500 px-4 py-2 rounded-md"
+          className="bg-white hover:grey-50 text-blue-500 px-4 py-2 rounded-md"
           onClick={() => onEdit(note)}
         >
-          Edit
+          <FaEdit size={18} />
         </button>
         <button
           className="bg-white hover:bg-grey-700 text-red-600 px-4 py-2 rounded-md"
           onClick={() => onDelete(note._id)}
         >
-          Delete
+          <FaTrash size={18} />
         </button>
       </div>
     </div>

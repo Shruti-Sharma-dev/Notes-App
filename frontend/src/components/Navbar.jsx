@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/ContextProvider.jsx';
 import { Link } from 'react-router-dom';
-import { FaUser } from 'react-icons/fa';
+import { FaUser,FaBars } from 'react-icons/fa';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -16,16 +16,17 @@ const Navbar = () => {
     <>
       {/* Navbar */}
       <nav className="flex justify-between items-center p-4 bg-teal-500 text-white relative">
-        <h1 className="text-2xl font-bold">NotEase</h1>
-
-        
+        <div className='flex justify-between items-center gap-2'>
+        <FaUser className="text-white  " size={20} />
+        <h1 className="text-2xl font-bold ">{user?.name}</h1>
+        </div>
 
         {user ? (
           <button
-            className="flex items-center gap-2 p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition "
+            className="flex items-center   bg-opacity-20 hover:bg-opacity-30 transition "
             onClick={() => setIsSidebarOpen(true)}
           >
-            <FaUser className="text-gray-500  hover:text-blue-500 cursor-pointer" size={20} />
+            <FaBars className="text-white  hover:text-blue-500 cursor-pointer" size={20} />
           </button>
         ) : (
           <div className="flex gap-2">
@@ -46,7 +47,7 @@ const Navbar = () => {
         }`}
       >
         <div className="flex justify-between items-center px-4 py-4 border-b border-gray-300">
-          <h2 className="text-lg font-semibold text-teal-700">Hello, {user?.name}</h2>
+          <h3 className="text-lg font-semibold text-teal-700"> Hello, {user?.name}</h3>
           <button
             className="text-gray-600 text-2xl hover:text-red-500"
             onClick={() => setIsSidebarOpen(false)}
