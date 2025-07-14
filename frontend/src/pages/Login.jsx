@@ -13,7 +13,7 @@ const {login} = useAuth();
 
 const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log( email, password);
+  
 
     try {
         const response = await axios.post(  `${import.meta.env.VITE_API_URL}/auth/login`, {

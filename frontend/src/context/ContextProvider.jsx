@@ -30,7 +30,7 @@ const ContextProvider = ({ children }) => {
       if (!token) return;                // ⛔ don’t ping server if no token
 
       try {
-        const res = await axios.get("http://localhost:5000/api/auth/verify", {
+        const res = await axios.get( `${import.meta.env.VITE_API_URL}/auth/verify`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (res.data.success) setUser(res.data.user);
