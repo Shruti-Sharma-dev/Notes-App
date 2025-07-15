@@ -5,6 +5,18 @@ import connectDB from './db/db.js';
 import authRouter from './routes/auth.js';
 import noteRouter from './routes/note.js';
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+
+
+
+
+
+
+
+
+
 dotenv.config();
 const app = express();
 
@@ -34,6 +46,7 @@ app.use((req, res, next) => {
 });
 app.options('*', cors(corsOptions)); // Preflight support
 
+
 app.use((req, res, next) => {
   console.log(`[${req.method}] ${req.url}`);
   next();
@@ -41,6 +54,23 @@ app.use((req, res, next) => {
 
 app.use('/api/auth', authRouter);
 app.use('/api/note', noteRouter);
+
+
+
+// Needed for __dirname in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve static files from Vite build (e.g., dist/)
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// Catch-all route to handle React Router in Vite
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
+
+
 
 const startServer = async () => {
   try {
